@@ -1,11 +1,11 @@
 
 upload/
 public/
+__pycache__/
 
 # dataset
 /data/*
 !/data/上映中の映画/
-
 
 # Created by https://www.gitignore.io/api/node
 

@@ -40,14 +40,14 @@ const options = {
     },
     elements: {
         point: {
-            radius: 4,
+            radius: 3,
             pointStyle: "circle",
             backgroundColor: "rgba(75,192,192,0.8)",
             borderWidth: 1,
-            borderColor: "rgba(75,192,220,1)",
-            hitRadius: 4,
-            hoverRadius: 4,
-            hoverBorderWidth: 2
+            borderColor: "rgba(215,252,240,1)",
+            hitRadius: 10,
+            hoverRadius: 6,
+            hoverBorderWidth: 4
         }
     },
     // 点にカーソル合わせた時の処理
