@@ -45,9 +45,9 @@ const options = {
             backgroundColor: "rgba(75,192,192,0.8)",
             borderWidth: 1,
             borderColor: "rgba(215,252,240,1)",
-            hitRadius: 10,
-            hoverRadius: 6,
-            hoverBorderWidth: 4
+            hitRadius: 0.0001,
+            hoverRadius: 5,
+            hoverBorderWidth: 3
         }
     },
     // 点にカーソル合わせた時の処理
