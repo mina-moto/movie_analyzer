@@ -12,31 +12,6 @@ const exec = require('child_process').exec;
 const spawn = require('child_process').spawn;
 
 const dataDir = path.join(__dirname, "../data");
-const uploadDir = path.join(__dirname, "../upload");
-
-const storage = multer.diskStorage({
-    destination: uploadDir,
-    filename: function(req, file, cb) {
-        cb(null, file.originalname + '-' + Date.now())
-    }
-})
-const upload = multer({
-    storage: storage
-})
-
-
-function unzip(name, path) {
-    return new Promise((resolve, reject) => {
-        exec(`unzip -q ${name} -d ${path}`, (err, stdout, stderr) => {
-            if (err) {
-                reject(err);
-                return;
-            }
-            resolve(stdout);
-        });
-    })
-}
-
 
 function mkdir(dirPath) {
     return new Promise((resolve, reject) => {
@@ -129,34 +104,12 @@ function getStatusCode(code) {
     }
 }
 
-
-router.post('/upload', upload.single("upFile"), (req, res, next) => {
-    if (req.file.mimetype === "application/zip") {
-        mkdir(dataDir)
-            .then(() => unzip(path.join(uploadDir, req.file.filename), path.join(dataDir, req.file.filename)))
-            .then(() => remove(path.join(uploadDir, req.file.filename)))
-            .then(() => {
-                res.status(200).json({
-                    resultId: req.file.filename
-                });
-                console.log(`INFO Extracted zip to data/${req.file.filename}`);
-            })
-            .catch(err => res.status(500).send("Failed To Extract ZIP"));
-    } else {
-        remove(path.join(uploadDir, req.file.filename))
-            .then(() => res.status(400).send("Only Accept ZIP"))
-            .catch(err => res.status(400).send("Only Accept ZIP"));
-    }
-});
-
-
 router.get('/is_exist', (req, res, next) => {
     const filePath = path.join(dataDir, req.query.id);
     promisify(fs.access)(filePath, fs.constants.R_OK | fs.constants.W_OK)
         .then(() => res.sendStatus(200))
         .catch(err => res.sendStatus(getStatusCode(err.code)));
 });
-
 
 router.get('/analyze_list', (req, res, next) => {
     promisify(fs.readdir)(dataDir)

@@ -56,9 +56,9 @@ def calc_pca_2d(result_300d,page=Page.NOW):
         json.dump(result_2d_json,f,indent=4,ensure_ascii=False)
 
 if __name__ == '__main__':
-    for page in Page:
-        summary_data_set = generate_summary_data_set(page)
-        calc_pca_2d(calc_movie_to_vec(summary_data_set,page=page),page=page)
-    # page=Page.NETFLIX
-    # summary_data_set = generate_summary_data_set(page)
-    # calc_pca_2d(calc_movie_to_vec(summary_data_set,page=page),page=page)
+    # for page in Page:
+    #     summary_data_set = generate_summary_data_set(page)
+    #     calc_pca_2d(calc_movie_to_vec(summary_data_set,page=page),page=page)
+    page=Page.AMAZON
+    summary_data_set = generate_summary_data_set(page)
+    calc_pca_2d(calc_movie_to_vec(summary_data_set,page=page),page=page)

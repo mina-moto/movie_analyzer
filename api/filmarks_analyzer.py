@@ -128,7 +128,10 @@ if __name__ == '__main__':
     #     download_movie_list(page)
     #     download_main_txt(page)
     #     print(page)
-    page=Page.NETFLIX
-    download_movie_list(page=page)
+    page=Page.AMAZON
+    # download_movie_list(page=page)
+    print("title time")
+    print(time.time() - start)
+    print("summary time")
     download_main_txt(page=page)
     print(time.time() - start)

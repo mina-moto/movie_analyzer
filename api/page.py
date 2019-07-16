@@ -8,3 +8,4 @@ class Page(Enum):
     ACADEMY_AWAR={"name":"アカデミー賞受賞映画作品","url":"https://filmarks.com/list/award/1"}
     HULU={"name":"Huluで視聴可能な映画","url":"https://filmarks.com/list/vod/hulu"}
     NETFLIX={"name":"Netflixで視聴可能な映画","url":"https://filmarks.com/list/vod/netflix"}
+    AMAZON={"name":"AmazonPrimeVideoで視聴可能な映画","url":"https://filmarks.com/list/vod/amazon_video"}
