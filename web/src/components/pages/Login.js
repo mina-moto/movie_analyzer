@@ -28,7 +28,6 @@ class Login extends React.Component {
 
     onStartClick(e) {
         e.preventDefault();
-        // this.props.history.push("/dashboard/");
         // プロジェクト一覧へ
         this.props.history.push("/data/");
     }
@@ -37,13 +36,14 @@ class Login extends React.Component {
         const {classes} = this.props;
         return (<div>
             <Typography variant="display1" gutterBottom="gutterBottom" align="center" className={classes.pad4}>
-                VET
+                Movie ANALYZER
             </Typography>
             <div className={classes.centering}>
                 <img src={sample_scatter} alt="sample_scatter"/>
             </div>
             <Typography variant="headline" gutterBottom="gutterBottom" align="center" className={classes.pad4}>
                 Visualization of Electric power data by Tsne.
+                説明
             </Typography>
             <div className={classes.centering}>
                 <Button variant="contained" color="primary" className={classes.button} onClick={e => this.onStartClick(e)}>

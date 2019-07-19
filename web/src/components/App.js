@@ -34,7 +34,6 @@ import blue from '@material-ui/core/colors/blue';
 import Login from './pages/Login';
 // import Home from './pages/Home';
 import Project from './pages/Project';
-import Result from './pages/Result';
 import ResultChart from './pages/ResultChart';
 import NotFound from './pages/NotFound';
 
@@ -100,7 +99,7 @@ class App extends React.Component {
 
         this.state = {
             rootPath: "/",
-            title: "Movie Analyzer",
+            title: "Movie ANALYZER",
             isOpenSnackBar: false,
             snackMsg: "",
             mobileOpen: false
@@ -142,7 +141,7 @@ class App extends React.Component {
             <div className={classes.toolbar}>
                 <Toolbar>
                     <Button className={classes.menuButton} aria-label="Top" onClick={() => this.pushBrowserHistory("/")}>
-                        Movie Analyzer
+                        Movie ANALYZER
                     </Button>
                 </Toolbar>
             </div>
@@ -175,7 +174,7 @@ class App extends React.Component {
                         <Hidden smDown="smDown" implementation="css">
                             <div className={classes.logoBox}>
                                 <Button className={classes.menuButton} color="inherit" aria-label="Top" onClick={() => this.pushBrowserHistory("/")}>
-                                    Novel Analyzer
+                                    MOVIE ANALYZER
                                 </Button>
                             </div>
                         </Hidden>
