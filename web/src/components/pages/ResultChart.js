@@ -18,7 +18,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 import SyntaxHighlighter, {registerLanguage} from "react-syntax-highlighter/prism-light";
-import java from 'react-syntax-highlighter/languages/prism/java';
+// import java from 'react-syntax-highlighter/languages/prism/java';
 import {vs as PrismVs} from 'react-syntax-highlighter/styles/prism';
 
 const styles = {
@@ -101,18 +101,19 @@ class ResultChart extends React.Component {
     // クリックした点の映画とその周辺の映画,listItemに追加
     onElementsClick = (elem) => {
         if (elem.length !== 0) {
-            // datasets?
-            // let data = this.state.chartData.datasets[0].data[elem[0]._index];
-            // this.setState({listItem: data.l.split("\n")});
-            let datasets=this.state.chartData.datasets;
-            let data=[];
-            // elemもdatasetsはtitle1つのみ保持
-            // サーバに投げて周辺の映画返すようにする？もしくはJson
-            for(let i=0;i<elem.length;i++){
-                 data.push(datasets[0].data[elem[i]._index].l);
-                 // console.log(data);
+            // elemもdatasetsも選択中のtitle1つのみ保持
+            let select_movie = this.state.chartData.datasets[0].data[elem[0]._index];
+            let select_movie_near_list=[];
+            let near_json = require(`../../../../api/data/${this.state.resultId}/result/result_near.json`);
+            // console.log(near_json);
+            for(let key in near_json){
+                if(select_movie["l"]===key){
+                    select_movie_near_list=near_json[key];
+                    break;
+                }
             }
-            this.setState({listItem: data});
+            console.log(select_movie_near_list);
+            this.setState({listItem: select_movie_near_list});
         }
     }
 

@@ -8,6 +8,8 @@ from sklearn.decomposition import PCA
 from sklearn.manifold import MDS,TSNE
 from page import Page
 import glob
+import numpy as np
+from scipy.spatial import distance_matrix
 import random
 
 # docを単語に分割しlistで返す
@@ -63,7 +65,8 @@ def calc_movie_to_vec(summary_data_set,page=Page.NOW):
     return result_doc_to_vec
 
 # pca分析を行い2Dに次元削減して，chartjsで読み込めるようJson形式で結果保存
-# {"chartData":{"datasets":[{"data":[{"x":double,"y":double,"l":"タイトル"}...]}]}}
+# json={"chartData":{"datasets":[{"data":[{"x":double,"y":double,"l":"タイトル"}...]}]}}
+# return=[{"x":double,"y":double,"l":"タイトル"},{},...,{}]
 def calc_pca_2d(result_doc_to_vec,page=Page.NOW):
     result_2d = []#次元削減後の結果のリスト
     title_list=result_doc_to_vec.keys()
@@ -74,17 +77,44 @@ def calc_pca_2d(result_doc_to_vec,page=Page.NOW):
     # result_2d_json = {"chartData": {"datasets": {"data": data}}
     result_2d_json = {"chartData": {"datasets": [{"data": result_2d}]}}
     save_path="./api/data/" + page.value["name"]+"/result/result_2d.json"
-
-    # 近くのものを計算してJsonで格納?
-    # for title, point in zip(title_list,point_list):
-
     with open(save_path,"w") as f:
         json.dump(result_2d_json,f,indent=4,ensure_ascii=False)
 
+    calc_near_data(result_2d,page=page)
+
+#各映画の近くの点を計算してlistにしてJsonで保存
+def calc_near_data(result_2d,page=Page.NOW):
+    near_data={}
+    # result_2dの[x,y]座標のリスト取得
+    point_list=[]
+    for movie_data in result_2d:
+        point_list.append([movie_data["x"],movie_data["y"]])
+    # limit:result_2d内の最も離れている2点間距離取得し,その1%を閾値とする
+    # distance_matrix = np.linalg.norm(point_list[:, np.newaxis] - point_list, axis=-1)
+    movie_distance_matrix=distance_matrix(point_list,point_list)
+    # print(len(movie_distance_matrix))
+    limit=movie_distance_matrix.max()*(1/100)
+    # print(limit)
+    for movie_data in result_2d:
+        # 先頭の要素は自身のタイトル
+        near_data[movie_data["l"]]=[movie_data["l"]]
+        movie_data_point=np.array([movie_data["x"],movie_data["y"]])
+        for another_movie_data in result_2d:
+            if movie_data==another_movie_data:
+                continue
+            #movie_dataとanother_movie_dataの距離がlimit以下なら
+            another_movie_data_point=np.array([another_movie_data["x"],another_movie_data["y"]])
+            distance=np.linalg.norm(another_movie_data_point-movie_data_point)
+            if distance<=limit:
+                # movie_dataのnear_dataとしてanother_movie_dataを追加
+                near_data[movie_data["l"]].append(another_movie_data["l"])
+    save_path="./api/data/" + page.value["name"]+"/result/result_near.json"
+    with open(save_path,"w") as f:
+        json.dump(near_data,f,indent=4,ensure_ascii=False)
 if __name__ == '__main__':
-    # for page in Page:
-    #     summary_data_set = generate_summary_data_set(page)
-    #     calc_pca_2d(calc_movie_to_vec(summary_data_set,page=page),page=page)
-    page=Page.NOW
-    summary_data_set = generate_summary_data_set(page)
-    calc_pca_2d(calc_movie_to_vec(summary_data_set,page=page),page=page)
+    for page in Page:
+        summary_data_set = generate_summary_data_set(page)
+        calc_pca_2d(calc_movie_to_vec(summary_data_set,page=page),page=page)
+    # page=Page.NOW
+    # summary_data_set = generate_summary_data_set(page)
+    # calc_pca_2d(calc_movie_to_vec(summary_data_set,page=page),page=page)

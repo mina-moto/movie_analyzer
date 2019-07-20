@@ -5,7 +5,7 @@ from gensim.models.doc2vec import Doc2Vec,TaggedDocument
 def train(dataset):
     trainings=[TaggedDocument(doc, [i]) for i, doc in enumerate(dataset.values())]
     # print(len(dataset))
-    model = Doc2Vec(documents= trainings,dm=1,min_count=1,vector_size=20,window=5,epochs=200)
+    model = Doc2Vec(documents= trainings,dm=1,min_count=1,vector_size=100,window=5,epochs=200)
     model.save("./api/model/AMAZON_model")
 
 

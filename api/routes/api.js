@@ -13,32 +13,6 @@ const spawn = require('child_process').spawn;
 
 const dataDir = path.join(__dirname, "../data");
 
-function mkdir(dirPath) {
-    return new Promise((resolve, reject) => {
-        exec(`mkdir -p ${dirPath}`, (err, stdout, stderr) => {
-            if (err) {
-                reject(err);
-                return;
-            }
-            resolve(stdout);
-        });
-    })
-}
-
-
-function remove(filePath) {
-    return new Promise((resolve, reject) => {
-        exec(`rm ${filePath}`, (err, stdout, stderr) => {
-            if (err) {
-                reject(err);
-                return;
-            }
-            resolve(stdout);
-        });
-    })
-}
-
-
 let executing = "";
 let taskStatus = "";
 
@@ -63,9 +37,9 @@ function checkTask(targetDir, filename) {
         });
         process.on("close", (code) => {
             if (taskStatus === "error") {
-                console.log(`INFO ${filename} APTED exited with error.`);
+                console.log(`error.`);
             } else {
-                console.log(`INFO ${filename} APTED exited.`);
+                console.log(`success`);
             }
             executing = "";
             taskStatus = "";

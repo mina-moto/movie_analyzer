@@ -110,7 +110,7 @@ def download_main_txt(page=Page.NOW):
         url = json_url["URL"]
         if not (title in file_name_list):
             # print(url)
-            time.sleep(0.1)
+            time.sleep(1)
             write_text(summary_path + title, get_main_text(url))
 
     # Jsonにないタイトルの映画削除
