@@ -17,10 +17,6 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-import SyntaxHighlighter, {registerLanguage} from "react-syntax-highlighter/prism-light";
-// import java from 'react-syntax-highlighter/languages/prism/java';
-import {vs as PrismVs} from 'react-syntax-highlighter/styles/prism';
-
 const styles = {
     result: {
         alignItems: "stretch",

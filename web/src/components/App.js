@@ -12,7 +12,6 @@ import IconButton from '@material-ui/core/IconButton';
 
 import CloseIcon from '@material-ui/icons/Close';
 import MenuIcon from '@material-ui/icons/Menu';
-import DashboardIcon from '@material-ui/icons/Dashboard';
 import HistoryIcon from '@material-ui/icons/History';
 
 import Drawer from '@material-ui/core/Drawer';
@@ -25,10 +24,7 @@ import Typography from '@material-ui/core/Typography';
 import Hidden from '@material-ui/core/Hidden';
 import Divider from '@material-ui/core/Divider';
 
-import indigo from '@material-ui/core/colors/indigo';
 import teal from '@material-ui/core/colors/teal';
-import amber from '@material-ui/core/colors/amber';
-import pink from '@material-ui/core/colors/pink';
 import blue from '@material-ui/core/colors/blue';
 
 import Login from './pages/Login';

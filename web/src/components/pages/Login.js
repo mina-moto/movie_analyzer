@@ -6,7 +6,6 @@ import {withStyles} from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
-import TedImage from '../../images/ted.svg'
 import sample_scatter from '../../images/sample_scatter.png'
 
 const styles = {
@@ -42,12 +41,11 @@ class Login extends React.Component {
                 <img src={sample_scatter} alt="sample_scatter"/>
             </div>
             <Typography variant="headline" gutterBottom="gutterBottom" align="center" className={classes.pad4}>
-                Visualization of Electric power data by Tsne.
-                説明
+                映画の分布を可視化します．
             </Typography>
             <div className={classes.centering}>
                 <Button variant="contained" color="primary" className={classes.button} onClick={e => this.onStartClick(e)}>
-                    START!
+                    START
                 </Button>
             </div>
         </div>);
