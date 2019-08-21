@@ -1,11 +1,8 @@
 import React from 'react';
-
 import PropTypes from 'prop-types';
-
 import {withStyles} from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-
 import sample_scatter from '../../images/sample_scatter.png'
 
 const styles = {
@@ -41,7 +38,7 @@ class Login extends React.Component {
                 <img src={sample_scatter} alt="sample_scatter"/>
             </div>
             <Typography variant="headline" gutterBottom="gutterBottom" align="center" className={classes.pad4}>
-                映画の分布を可視化します．
+                Visualize the distribution of the movie.
             </Typography>
             <div className={classes.centering}>
                 <Button variant="contained" color="primary" className={classes.button} onClick={e => this.onStartClick(e)}>
