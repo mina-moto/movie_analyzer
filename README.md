@@ -33,4 +33,4 @@ python movie_to_vec.py
 You can see app on localhost
 
 ## Demo
-<img src="demo/movie_analyzer.gif" width="640px">
+<img src="demo/movie_analyzer_demo.gif" width="640px">
